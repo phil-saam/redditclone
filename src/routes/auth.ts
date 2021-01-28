@@ -4,13 +4,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
 
-import { User } from "../entities/User";
-import { env } from "process";
+import User from "../entities/User";
+import auth from "../middleware/auth";
 
 const register = async (req: Request, res: Response) => {
   const { email, username, password } = req.body;
   try {
-    // s Validate data
+    // Validate data
     let errors: any = {};
     const emailUser = await User.findOne({ email });
     const usernameUser = await User.findOne({ username });
@@ -74,26 +74,26 @@ const login = async (req: Request, res: Response) => {
   } catch (err) {}
 };
 
-const me = async (req: Request, res: Response) => {
-  try {
-    const token = req.cookies.token;
-    if (!token) throw new Error("Unauthenticated");
+const me = async (_: Request, res: Response) => {
+  return res.json(res.locals.user);
+};
 
-    const { username }: any = jwt.verify(token, process.env.JWT_SECRET);
+const logout = (_: Request, res: Response) => {
+  res.set("Set-Cookie"),
+    cookie.serialize("token", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      expires: new Date(0),
+      path: "/",
+    });
 
-    const user = await User.findOne({ username });
-
-    if (!user) throw new Error("Unauthenticated");
-
-    return res.json({ message: "testing" });
-  } catch (err) {
-    console.log(err);
-    return res.status(401).json({ error: err.message });
-  }
+  return res.status(200).json({ success: true });
 };
 
 const router = Router();
 router.post("/register", register);
 router.post("/login", login);
-router.get("/me", me);
+router.get("/me", auth, me);
+router.get("/logout", auth, logout);
 export default router;
