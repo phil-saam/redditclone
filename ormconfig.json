@@ -2,17 +2,17 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "postgres",
+  "username": "admin",
   "password": "PFountain734!",
   "database": "reddit",
-  "synchronize": false,
-  "logging": true,
-  "entities": ["src/entities/**/*.ts"],
-  "migrations": ["src/migrations/**/*.ts"],
-  "subscribers": ["src/subscribers/**/*.ts"],
+  "synchronize": true,
+  "logging": false,
+  "entities": ["src/entity/**/*.ts"],
+  "migrations": ["src/migration/**/*.ts"],
+  "subscribers": ["src/subscriber/**/*.ts"],
   "cli": {
-    "entitiesDir": "src/entities",
-    "migrationsDir": "src/migrations",
-    "subscribersDir": "src/subscribers"
+    "entitiesDir": "src/entity",
+    "migrationsDir": "src/migration",
+    "subscribersDir": "src/subscriber"
   }
 }
