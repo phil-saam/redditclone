@@ -9,8 +9,8 @@ export default function Register() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        className="w-40 h-screen bg-center bg-cover"
-        style={{ backgroundImage: "url('/images/bricks.jpg')" }}
+        className="h-screen bg-center bg-cover w-36"
+        style={{ backgroundImage: "url('/images/road.jpg')" }}
       ></div>
       <div className="flex flex-col justify-center pl-6">
         <div className="w-70">
@@ -27,26 +27,26 @@ export default function Register() {
               />
               <label htmlFor="agreement" className="text-xs cursor-pointer">
                 I agree to hear about cool stuff on reddit
-              </label>{" "}
+              </label>
             </div>
             <div className="mb-2">
               <input
                 type="email"
-                className="w-full p-3 py-2 bg-gray-100 border border-gray-300 rounded"
+                className="w-full p-3 duration-200 border border-gray-300 rounded outline-none transistion bg-gray-50 focus:bg-white hover:bg-white"
                 placeholder="Email"
               />
             </div>
             <div className="mb-2">
               <input
                 type="text"
-                className="w-full p-3 py-2 bg-gray-100 border border-gray-300 rounded"
+                className="w-full p-3 duration-200 border border-gray-300 rounded outline-none transistion bg-gray-50 focus:bg-white hover:bg-white"
                 placeholder="Username"
               />
             </div>
             <div className="mb-2">
               <input
                 type="password"
-                className="w-full p-3 py-2 bg-gray-100 border border-gray-300 rounded"
+                className="w-full p-3 duration-200 border border-gray-300 rounded outline-none transistion bg-gray-50 focus:bg-white hover:bg-white"
                 placeholder="password"
               />
             </div>
