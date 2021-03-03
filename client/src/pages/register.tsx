@@ -33,7 +33,7 @@ export default function Register() {
     }
   };
   return (
-    <div className="flex">
+    <div className="flex bg-white">
       <Head>
         <title>Register</title>
       </Head>
@@ -93,7 +93,7 @@ export default function Register() {
             </button>
           </form>
           <small>
-            Already a redditor?{" "}
+            Already a WorkingTitler?
             <Link href="/login">
               <a className="ml-1 text-blue-500 uppercase">log in</a>
             </Link>

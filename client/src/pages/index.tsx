@@ -1,22 +1,47 @@
+import Axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+import { Post } from "../types";
+import PostCard from "../components/PostCard";
+
+dayjs.extend(relativeTime);
 
 export default function Home() {
+  const [posts, setPosts] = useState<Post[]>([]);
+  useEffect(() => {
+    Axios.get("/posts")
+      .then((res) => setPosts(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
-    <div className={styles.container}>
+    <div className="pt-12">
       <Head>
-        <title>Create Next App</title>
+        <title>Authority App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          <Link href="/register">
-            <a>Register</a>
-          </Link>
-        </h1>
-      </main>
+      <div className="container flex pt-4">
+        {/* Posts feed */}
+        <div className="w-160">
+          {posts.map((post) => (
+            <PostCard post={post} key={post.identifier} />
+          ))}
+        </div>
+        {/* Sidebar */}
+      </div>
     </div>
   );
 }
+
+// export const getStaticProps: GetServerSideProps = async (context) => {
+//   try {
+//     const res = await Axios.get("/posts");
+//     return { props: { posts: res.data } };
+//   } catch (err) {
+//     return { props: { error: "Something went wrong" } };
+//   }
+// };
